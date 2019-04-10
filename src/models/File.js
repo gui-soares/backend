@@ -10,7 +10,7 @@ const File = new mongoose.Schema(
       type: String,
       required: true,
   },
-}, 	
+},
 	{
  	 timestamps: true,
  	 toObject : {virtuals: true},
@@ -19,7 +19,8 @@ const File = new mongoose.Schema(
 );
 
 File.virtual('url').get( function() {
-   return `http://localhost:3333/files/${encodeURIComponent(this.path)}`
+  const url = process.env.URL || 'http://localhost:3333'
+   return `${url}/files/${encodeURIComponent(this.path)}`
 });
 
 
